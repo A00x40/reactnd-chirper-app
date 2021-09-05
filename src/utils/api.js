@@ -5,14 +5,15 @@ import {
   _saveTweet,
 } from './_DATA.js'
 
-export function getInitialData () {
-  return Promise.all([
-    _getUsers(),
-    _getTweets(),
-  ]).then(([users, tweets]) => ({
-    users,
-    tweets,
-  }))
+export async function getInitialData () {
+  const [users, tweets] = await Promise.all([
+        _getUsers(),
+        _getTweets(),
+    ])
+    return ({
+        users,
+        tweets,
+    })
 }
 
 export function saveLikeToggle (info) {

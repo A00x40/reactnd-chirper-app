@@ -7,6 +7,16 @@ export default (state = {}, action) => {
                 ...state ,
                 ...action.payload.tweets
             }
+        case actionTypes.TOGGLE_TWEET:
+            return {
+                ...state ,
+                [action.payload.id] : {
+                    ...state[action.payload.id] ,
+                    likes: action.payload.hasLiked === true 
+                    ? state[action.payload.id].likes.filter( (id) => id !== action.payload.authUser)
+                    : state[action.payload.id].likes.concat( [action.payload.authUser] )
+                }
+            }
         default:
             return state
     }

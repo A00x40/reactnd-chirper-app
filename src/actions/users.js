@@ -6,7 +6,3 @@ export const postUsers = (users) => ({
         users
     }
 })
-
-export const getUsers = () => ({
-    type : actionTypes.GET_USERS 
-})

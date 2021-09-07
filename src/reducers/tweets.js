@@ -17,6 +17,24 @@ export default (state = {}, action) => {
                     : state[action.payload.id].likes.concat( [action.payload.authUser] )
                 }
             }
+        case actionTypes.SAVE_NEW_TWEET: 
+            let { tweet } = action.payload
+
+            let replies = {}
+            if( tweet.replyingTo !== null ) {
+                replies = {
+                    [tweet.replyingTo] : {
+                        ...state[tweet.replyingTo] ,
+                        replies : state[tweet.replyingTo].replies.concat( [tweet.id] )
+                    }
+                }
+            }
+
+            return {
+                ...state ,
+                [tweet.id] : tweet ,
+                ...replies
+            }
         default:
             return state
     }

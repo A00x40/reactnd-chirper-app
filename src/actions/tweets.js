@@ -41,18 +41,13 @@ export const handleSaveNewTweet = (text, replingTo) => {
     return async (dispatch, getState) => {
         const { authUser } = getState()
         dispatch(showLoading())
+
         return saveTweet({
             text ,
             author: authUser ,
             replingTo
-        }).then( tweet => {
-            dispatch(saveNewTweet(tweet))
-        .then( () => {
-            dispatch(hideLoading())
         })
-        }).catch(e => {
-                console.warn(e)        
-        })
-        
+        .then( tweet => dispatch(saveNewTweet(tweet)))
+        .then( () => dispatch(hideLoading()))
     }
 }
